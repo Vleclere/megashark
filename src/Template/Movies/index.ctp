@@ -20,6 +20,7 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('duration') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('release_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -31,6 +32,7 @@
                 <td><?= $this->Number->format($movie->id) ?></td>
                 <td><?= h($movie->name) ?></td>
                 <td><?= $this->Number->format($movie->duration) ?></td>
+                <td><?= h($movie->release_date) ?></td>
                 <td><?= h($movie->created) ?></td>
                 <td><?= h($movie->modified) ?></td>
                 <td class="actions">

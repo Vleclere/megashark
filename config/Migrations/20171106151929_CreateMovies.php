@@ -35,6 +35,7 @@ class CreateMovies extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        
         $table->create();
     }
 }
