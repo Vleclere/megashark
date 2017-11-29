@@ -1,13 +1,13 @@
 <?php
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\ShowtimesController;
+use App\Controller\TemplateController;
 use Cake\TestSuite\IntegrationTestCase;
 
 /**
- * App\Controller\ShowtimesController Test Case
+ * App\Controller\TemplateController Test Case
  */
-class ShowtimesControllerTest extends IntegrationTestCase
+class TemplateControllerTest extends IntegrationTestCase
 {
 
     /**
@@ -16,7 +16,7 @@ class ShowtimesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.showtimes'
+        'app.template'
     ];
 
     /**
