@@ -20,7 +20,7 @@ class RoomsController extends AppController
     public function index()
     {
         $rooms = $this->paginate($this->Rooms);
-
+        
         $this->set(compact('rooms'));
         $this->set('_serialize', ['rooms']);
     }
@@ -40,6 +40,23 @@ class RoomsController extends AppController
 
         $this->set('room', $room);
         $this->set('_serialize', ['room']);
+        
+        $selShow = $this->Rooms->Showtimes->find()
+            ->where(['room_id' => $id]);
+        
+        $this->set('selShow', $selShow);
+        $this->set('_serialize', ['selShow']);
+        
+        foreach($selShow as $show)
+        {
+           $movies = $this->Rooms->Showtimes->Movies->find()
+            ->where(['id' => $show->movie_id]); 
+        }
+            
+        $this->set('movies', $movies);
+        $this->set('_serialize', ['movies']);
+        
+        
     }
 
     /**

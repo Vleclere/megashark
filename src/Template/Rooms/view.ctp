@@ -37,4 +37,36 @@
             <td><?= h($room->modified) ?></td>
         </tr>
     </table>
+    <table class="horizontal-table">
+    <?php foreach ($movies as $movie): ?>
+        <th scope="row"><?= __('Lundi') ?></th>
+        <tr>
+            <td><?= h($movie->name) h($movie->) ?></td>
+        </tr>
+        <th scope="row"><?= __('Mardi') ?></th>
+        <tr>
+            <td><?= h($movie->name) ?></td>
+        </tr>
+        <th scope="row"><?= __('Mercredi') ?></th>
+        <tr>
+            <td><?= h($movie->name) ?></td>
+        </tr>
+        <th scope="row"><?= __('Jeudi') ?></th>
+        <tr>
+            <td><?= h($movie->name) ?></td>
+        </tr>
+        <th scope="row"><?= __('Vendredi') ?></th>
+        <tr>
+            <td><?= h($movie->name) ?></td>
+        </tr>
+        <th scope="row"><?= __('Samedi') ?></th>
+        <tr>
+            <td><?= h($movie->name) ?></td>
+        </tr>
+        <th scope="row"><?= __('Dimanche') ?></th>
+        <tr>
+            <td><?= h($movie->name) ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
 </div>
