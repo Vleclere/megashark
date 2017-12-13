@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Rooms Controller
@@ -41,20 +42,41 @@ class RoomsController extends AppController
         $this->set('room', $room);
         $this->set('_serialize', ['room']);
         
-        $selShow = $this->Rooms->Showtimes->find()
-            ->where(['room_id' => $id]);
+        $startWeek = new Time(strtotime('monday this week'));
+        $endWeek = new Time(strtotime('sunday this week'));
+        
+        $selShow = $this->Rooms->Showtimes->find();
+        $selShow->where(['room_id' => $id]);
+        $selShow->where(['start >=' => $startWeek]);
+        $selShow->where(['start <=' => $endWeek]);
         
         $this->set('selShow', $selShow);
         $this->set('_serialize', ['selShow']);
+        
+        $showtimesThisWeek = Array(
+            "1" => "",
+            "2" => "",
+            "3" => "",
+            "4" => "",
+            "5" => "",
+            "6"=> "",
+            "7"=> ""
+            );
         
         foreach($selShow as $show)
         {
            $movies = $this->Rooms->Showtimes->Movies->find()
             ->where(['id' => $show->movie_id]); 
-        }
+            $nom = $movies->name;
+            $dateDebut = (new Time($show->start))->format('Y-m-d H:i:s');
+            $dateFin = (new Time($show->end))->format('Y-m-d H:i:s');
+            $showtimesThisWeek[$show->start->format('N')] = "Film : $nom<br>Debut : $dateDebut<br>Fin : $dateFin<br>";
             
-        $this->set('movies', $movies);
-        $this->set('_serialize', ['movies']);
+        }
+        
+        $this->set('showtimesThisWeek', $showtimesThisWeek);
+        $this->set('_serialize', ['showtimesThisWeek']);
+        
         
         
     }
