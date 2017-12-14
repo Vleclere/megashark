@@ -37,34 +37,28 @@
             <td><?= h($room->modified) ?></td>
         </tr>
     </table>
-    <table class="vertical-table">
+    <table style="word-wrap: break-word;">
+        <tr>
         <th scope="row"><?= __('Lundi') ?></th>
-        <tr>
-            <td><?= $showtimesThisWeek[1]?></td>
-        </tr>
+            
         <th scope="row"><?= __('Mardi') ?></th>
-        <tr>
-            <td><?= $showtimesThisWeek[2]?></td>
-        </tr>
+            
         <th scope="row"><?= __('Mercredi') ?></th>
-        <tr>
-            <td><?= $showtimesThisWeek[3]?></td>
-        </tr>
+            
         <th scope="row"><?= __('Jeudi') ?></th>
-        <tr>
-            <td><?= $showtimesThisWeek[4]?></td>
-        </tr>
+            
         <th scope="row"><?= __('Vendredi') ?></th>
-        <tr>
-            <td><?= $showtimesThisWeek[5]?></td>
-        </tr>
+            
         <th scope="row"><?= __('Samedi') ?></th>
-        <tr>
-            <td><?=$showtimesThisWeek[6]?></td>
-        </tr>
+            
         <th scope="row"><?= __('Dimanche') ?></th>
-        <tr>
-            <td><?= $showtimesThisWeek[7]?></td>
         </tr>
+        <?php for($i=1;$i<=7;$i++): ?>
+        <td>
+            <?php foreach($showtimesThisWeek[$i] as $show):?>
+                <p><?= $show ?></p>
+            <?php endforeach; ?>
+        </td>
+        <?php endfor; ?>
     </table>
 </div>

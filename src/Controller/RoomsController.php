@@ -42,35 +42,41 @@ class RoomsController extends AppController
         $this->set('room', $room);
         $this->set('_serialize', ['room']);
         
+        //On récupére le premier jours de la semaine et le dernier
         $startWeek = new Time(strtotime('monday this week'));
         $endWeek = new Time(strtotime('sunday this week'));
         
+        //On sélectionne les séances correspondant à la salle et dans la semaine
         $selShow = $this->Rooms->Showtimes->find();
         $selShow->where(['room_id' => $id]);
         $selShow->where(['start >=' => $startWeek]);
         $selShow->where(['start <=' => $endWeek]);
+        $selShow->order(['start']);
         
         $this->set('selShow', $selShow);
         $this->set('_serialize', ['selShow']);
         
+        //On initialise le tableau contenant les séances
         $showtimesThisWeek = Array(
-            "1" => "",
-            "2" => "",
-            "3" => "",
-            "4" => "",
-            "5" => "",
-            "6"=> "",
-            "7"=> ""
+            "1" => array(),
+            "2" => array(),
+            "3" => array(),
+            "4" => array(),
+            "5" => array(),
+            "6"=> array(),
+            "7"=> array()
             );
         
+        //On parcourt le tableau et on sélectionne chaque film dans cette salle
         foreach($selShow as $show)
         {
            $movies = $this->Rooms->Showtimes->Movies->find()
-            ->where(['id' => $show->movie_id]); 
-            $nom = $movies->name;
-            $dateDebut = (new Time($show->start))->format('Y-m-d H:i:s');
-            $dateFin = (new Time($show->end))->format('Y-m-d H:i:s');
-            $showtimesThisWeek[$show->start->format('N')] = "Film : $nom<br>Debut : $dateDebut<br>Fin : $dateFin<br>";
+            ->where(['id' => $show->movie_id])
+            ->first(); 
+            $dateDebut = (new Time($show->start))->format('H:i');
+            $dateFin = (new Time($show->end))->format('H:i');
+            //On enregistre les données dans le tableau à la ligne correspondante
+            $showtimesThisWeek[$show->start->format('N')][] = "$movies->name<br>$dateDebut / $dateFin<br>";
             
         }
         
